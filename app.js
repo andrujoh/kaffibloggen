@@ -6,9 +6,10 @@ var expressSanitizer = require("express-sanitizer"),
     express = require("express"),
     app = express();
 
-
+//6N~tF,66@G
 //App configuration
-mongoose.connect("mongodb://localhost/kaffibloggen");
+//mongoose.connect("mongodb://localhost/kaffibloggen");
+mongoose.connect("mongodb://kaffi:6N~tF,66@G@ds117931.mlab.com:17931/kaffibloggen");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
