@@ -58,6 +58,21 @@
           <li>
             <a href="/contact">Kontakt</a>
           </li>
+          <% if (!currentUser) { %>
+            <li>
+              <a href="/register">Registrer deg</a>
+            </li>
+            <li>
+              <a href="/login">Logg inn</a>
+            </li>
+          <% } else { %>
+          <li>
+            <a href="javascript:void(0)">Logget inn som <%= currentUser.username %></a>
+          </li>
+          <li>
+            <a href="/logout">Logg ut</a>
+          </li>
+          <% } %>
         </ul>
       </div>
       <!-- /.navbar-collapse -->

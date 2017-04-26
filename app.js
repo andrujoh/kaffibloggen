@@ -1,7 +1,10 @@
 
 var expressSanitizer = require("express-sanitizer"),
     methodOverride = require("method-override"),
+    LocalStrategy = require("passport-local"),
     bodyParser = require("body-parser"),
+    User = require("./models/user"),
+    passport = require("passport"),
     mongoose = require("mongoose"),
     express = require("express"),
     app = express();
@@ -15,6 +18,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
+//Passport configuration
+app.use(require("express-session")({
+  secret: "The secret is secret for all but one",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 //Mongoose configuration
 var blogSchema = new mongoose.Schema({
@@ -81,12 +100,12 @@ app.get("/blogs", (req, res) => {
 });
 
 //New route
-app.get("/blogs/new", (req, res) => {
+app.get("/blogs/new", isLoggedIn, (req, res) => {
   res.render("new");
 });
 
 //Create route
-app.post("/blogs", (req, res) => {
+app.post("/blogs", isLoggedIn, (req, res) => {
   //create blog
   req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.create(req.body.blog, (err, newBlog) => {
@@ -110,7 +129,7 @@ app.get("/blogs/:id", (req, res) => {
 });
 
 //Edit route
-app.get("/blogs/:id/edit", (req, res) => {
+app.get("/blogs/:id/edit", isLoggedIn, (req, res) => {
   Blog.findById(req.params.id, (err, foundBlog) => {
     if (err) {
       res.redirect("/blogs");
@@ -121,7 +140,7 @@ app.get("/blogs/:id/edit", (req, res) => {
 });
 
 //Update route
-app.put("/blogs/:id", (req, res) => {
+app.put("/blogs/:id", isLoggedIn, (req, res) => {
   req.body.blog.body = req.sanitize(req.body.blog.body);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if (err) {
@@ -133,7 +152,7 @@ app.put("/blogs/:id", (req, res) => {
 });
 
 //Delete route
-app.delete("/blogs/:id", (req, res) => {
+app.delete("/blogs/:id", isLoggedIn, (req, res) => {
   //Destroy
   Blog.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
@@ -143,6 +162,52 @@ app.delete("/blogs/:id", (req, res) => {
     }
   });
 });
+
+//Auth routes
+//Show register form
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+//Sign up logic
+app.post("/register", (req, res) => {
+  var newUser = new User({username: req.body.username});
+  User.register(newUser, req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      return res.render("register");
+    }
+    passport.authenticate("local")(req, res, function() {
+      res.redirect("/blogs");
+    });
+  });
+});
+
+//Login form
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+//Login logic
+app.post("/login", passport.authenticate("local",
+  {
+    successRedirect: "/blogs",
+    failureRedirect: "/login"
+  }), (req, res) => {
+});
+
+// Logout route
+app.get("/logout",(req, res) => {
+  req.logout(),
+  res.redirect("/blogs");
+});
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+}
 
 // 404
 app.get("*", (req, res) => {
