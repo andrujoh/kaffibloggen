@@ -30,37 +30,37 @@ var Blog = mongoose.model("Blog", blogSchema);
 //Init blogs
 // Blog.create({
 //   title: "Kaffe som dessert",
-//   image: "https://cdn.pixabay.com/photo/2017/03/27/09/04/coffee-2177763__340.jpg",
+//   image: "/images/coffee2.jpg",
 //   body: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
 // });
 
 // Blog.create({
 //   title: "Morgen Kaffen som slår alt",
-//   image: "https://cdn.pixabay.com/photo/2015/05/21/18/30/coffee-777612_960_720.jpg",
+//   image: "/images/coffee3.jpg",
 //   body: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
 // });
 
 // Blog.create({
 //   title: "Jeg trenger en Cappucino",
-//   image: "https://cdn.pixabay.com/photo/2015/03/11/11/38/coffee-668550_960_720.jpg",
+//   image: "/images/coffee1.jpg",
 //   body: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
 // });
 
 // Blog.create({
 //   title: "Kaffe som dessert",
-//   image: "https://cdn.pixabay.com/photo/2017/03/27/09/04/coffee-2177763__340.jpg",
+//   image: "/images/coffee2.jpg",
 //   body: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
 // });
 
 // Blog.create({
 //   title: "Morgen Kaffen som slår alt",
-//   image: "https://cdn.pixabay.com/photo/2015/05/21/18/30/coffee-777612_960_720.jpg",
+//   image: "/images/coffee3.jpg",
 //   body: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
 // });
 
 // Blog.create({
 //   title: "Jeg trenger en Cappucino",
-//   image: "https://cdn.pixabay.com/photo/2015/03/11/11/38/coffee-668550_960_720.jpg",
+//   image: "/images/coffee1.jpg",
 //   body: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
 // });
 
