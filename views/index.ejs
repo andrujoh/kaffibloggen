@@ -1,0 +1,41 @@
+<% include ./partials/header %>
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('https://cdn.pixabay.com/photo/2016/02/06/10/28/hara-1182735_960_720.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>KaffiBloggen</h1>
+          <hr class="small">
+          <span class="subheading">Et sted for kaffenytere</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+      <% blogs.forEach((blog) => { %>
+        <div class="post-preview">
+          <a href="/blogs/<%= blog._id %>">
+            <h2 class="post-title"><%= blog.title %></h2>
+          </a>
+          <p class="post-meta">Posted by <a href="#">Tor Andreas</a> <%= blog.created.toDateString() %></p>
+          <a href="/blogs/<%= blog._id %>">
+            <img class="img-responsive" src="<%= blog.image %>">
+          </a>
+          <p><%= blog.body.substring(0, 150) %> [...]</p>
+          <a class="blogLink" href="/blogs/<%= blog._id %>">Les hele artikkelen</a>
+        </div>
+        <hr>
+      <% }) %>
+      
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer %>
