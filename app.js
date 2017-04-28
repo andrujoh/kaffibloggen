@@ -40,7 +40,7 @@ var blogSchema = new mongoose.Schema({
   title: String,
   image: {type: String, default: "https://cdn.pixabay.com/photo/2013/07/13/09/51/coffee-156158_960_720.png"},
   body: String,
-  created: {type: Date, default: Date.now}
+  created: {type: Date, default: Date.now},
 });
 
 var Blog = mongoose.model("Blog", blogSchema);
