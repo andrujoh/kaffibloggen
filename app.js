@@ -179,7 +179,7 @@ app.delete("/blogs/:id", checkBlogOwnership, (req, res) => {
 //Auth routes
 //Show register form
 app.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", {page: "register"});
 });
 
 //Sign up logic
@@ -198,7 +198,7 @@ app.post("/register", (req, res) => {
 
 //Login form
 app.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {page: "login"});
 });
 
 //Login logic
