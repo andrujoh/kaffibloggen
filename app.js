@@ -11,7 +11,7 @@ var expressSanitizer = require("express-sanitizer"),
 
 //App configuration
 //mongoose.connect("mongodb://localhost/kaffibloggen");
-mongoose.connect("mongodb://kaffi:asd987fds@ds117931.mlab.com:17931/kaffibloggen");
+mongoose.connect(process.env.MONGOLAB_URI);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
