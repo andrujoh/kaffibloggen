@@ -8,10 +8,10 @@ var expressSanitizer = require("express-sanitizer"),
     mongoose = require("mongoose"),
     express = require("express"),
     app = express();
-
+console.log(process.env.DATABASEURL);
 //App configuration
-//mongoose.connect("mongodb://localhost/kaffibloggen");
-mongoose.connect(process.env.MONGOLAB_URI);
+var url = process.env.DATABASEURL || "mongodb://localhost/kaffibloggen";
+mongoose.connect(url);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
