@@ -23,7 +23,7 @@
           <a href="/blogs/<%= blog._id %>">
             <h2 class="post-title"><%= blog.title %></h2>
           </a>
-          <p class="post-meta">Skrevet av <em><a href="#"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></p>
+          <p class="post-meta">Skrevet av <em><a href="javascript:void(0)"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></p>
           <a href="/blogs/<%= blog._id %>">
             <img class="img-responsive img-center" src="<%= blog.image %>">
           </a>
