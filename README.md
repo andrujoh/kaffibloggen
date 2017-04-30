@@ -6,3 +6,4 @@ About side
 Egen forside
 Profil side
 Legge til brukere - done
+Bare eiere av post kan edit/delete

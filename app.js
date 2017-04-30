@@ -39,8 +39,15 @@ app.use(function(req, res, next) {
 var blogSchema = new mongoose.Schema({
   title: String,
   image: {type: String, default: "https://cdn.pixabay.com/photo/2013/07/13/09/51/coffee-156158_960_720.png"},
-  body: String,
+  blogpost: String,
   created: {type: Date, default: Date.now},
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user"
+    },
+    username: String
+  }
 });
 
 var Blog = mongoose.model("Blog", blogSchema);
@@ -48,39 +55,39 @@ var Blog = mongoose.model("Blog", blogSchema);
 
 //Init blogs
 // Blog.create({
-//   title: "Kaffe som dessert",
+//   title: "Kaffe som dessert er bra",
 //   image: "/images/coffee2.jpg",
-//   body: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
+//   blogpost: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
 // });
 
 // Blog.create({
 //   title: "Morgen Kaffen som slår alt",
 //   image: "/images/coffee3.jpg",
-//   body: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
+//   blogpost: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
 // });
 
 // Blog.create({
 //   title: "Jeg trenger en Cappucino",
 //   image: "/images/coffee1.jpg",
-//   body: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
+//   blogpost: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
 // });
 
 // Blog.create({
 //   title: "Kaffe som dessert",
 //   image: "/images/coffee2.jpg",
-//   body: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
+//   blogpost: "Seasonal et, medium mocha coffee single origin chicory. Cappuccino rich, caffeine that cortado carajillo brewed. French press percolator coffee half and half eu dripper cappuccino iced french press. At body, cream variety spoon, rich bar sweet foam extraction sit instant. Crema pumpkin spice, espresso redeye iced, sweet percolator siphon sugar café au lait ristretto."
 // });
 
 // Blog.create({
 //   title: "Morgen Kaffen som slår alt",
 //   image: "/images/coffee3.jpg",
-//   body: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
+//   blogpost: "Trifecta, flavour, dripper, decaffeinated con panna flavour et turkish dripper. Saucer rich cream affogato flavour a, and, cortado café au lait pumpkin spice redeye viennese. Qui flavour, saucer redeye, con panna kopi-luwak, half and half sweet caramelization blue mountain sweet flavour. That wings, dripper and cream roast wings. Plunger pot whipped cinnamon black ristretto galão robusta pumpkin spice. Cultivar grinder cup decaffeinated a and aged. Con panna, a cinnamon, macchiato, carajillo, wings et espresso trifecta arabica flavour. Aroma est crema, trifecta cappuccino cortado redeye turkish roast. Carajillo, turkish flavour, cream barista, id, aftertaste ut barista body coffee sugar. Whipped eu medium half and half grounds wings cortado cappuccino and seasonal."
 // });
 
 // Blog.create({
 //   title: "Jeg trenger en Cappucino",
 //   image: "/images/coffee1.jpg",
-//   body: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
+//   blogpost: "Filter, lungo aroma con panna beans skinny macchiato percolator aromatic barista. Americano viennese frappuccino est coffee organic strong saucer con panna. Whipped fair trade coffee cappuccino crema shop flavour aroma cortado sweet. Fair trade iced aromatic carajillo aromatic cortado et, french press siphon so aftertaste spoon. Cinnamon spoon, sit in mug cappuccino organic."
 // });
 
 //Routes
@@ -90,13 +97,13 @@ app.get("/", function(req, res) {
 });
 
 app.get("/blogs", (req, res) => {
-  Blog.find({}, (err, blogs) => {
+  Blog.find({}, (err, allBlogs) => {
     if (err) {
       res.status(500).send("<div style='text-align: center; margin-top: 10%'><h2>Her ble det en feil, gitt</h2><br><a href='/'>Tilbake</a></div>");
     } else {
-      res.render("index", {blogs: blogs});
+      res.render("index", {blogs: allBlogs, page: "blogs"});
     }
-  });
+  }).sort({created: -1});
 });
 
 //New route
@@ -107,8 +114,17 @@ app.get("/blogs/new", isLoggedIn, (req, res) => {
 //Create route
 app.post("/blogs", isLoggedIn, (req, res) => {
   //create blog
-  req.body.blog.body = req.sanitize(req.body.blog.body);
-  Blog.create(req.body.blog, (err, newBlog) => {
+  // var blogBody = req.body.blog.body;
+  // req.sanitize(blogBody);
+  var title = req.body.blog.title;
+  var image = req.body.blog.image;
+  var blogpost = req.body.blog.blogpost;
+  var author = {
+    id:req.user._id,
+    username: req.user.username
+  };
+  var newblogpost = {title: title, image: image, blogpost: blogpost, author: author};
+  Blog.create(newblogpost, (err, newBlog) => {
     if (err) {
       res.render("new");
     } else {
@@ -141,7 +157,8 @@ app.get("/blogs/:id/edit", isLoggedIn, (req, res) => {
 
 //Update route
 app.put("/blogs/:id", isLoggedIn, (req, res) => {
-  req.body.blog.body = req.sanitize(req.body.blog.body);
+  // var blogBody = req.body.blog.blogpost;
+  // req.sanitize(blogBody);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if (err) {
       res.redirect("/blogs");
