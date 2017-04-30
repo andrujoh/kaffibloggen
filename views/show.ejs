@@ -14,6 +14,7 @@
   </div>
 </header>
 
+
 <article>
   <div class="container">
     <div class="row">
@@ -24,13 +25,17 @@
         <div class="post-heading text-center">
           <h1><%= blog.title %></h1>
           <hr class="small">
-          <span class="meta">Posted by <em><a href="#"><%= blog.author.username %></a></em> on <%= blog.created.toDateString() %></span>
+          <span class="meta">Skrevet av <em><a href="#"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></span>
         </div>
         <p><%= blog.blogpost %></p>
-        <a class="btn btn-info" href="/blogs/<%= blog._id %>/edit">Rediger post</a>
-        <form id="deleteForm" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">Slett post</button>
-        </form>
+        
+        <% if (currentUser && blog.author.id.equals(currentUser._id)) { %>
+          <a class="btn btn-info" href="/blogs/<%= blog._id %>/edit">Rediger post</a>
+          <form id="deleteForm" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Slett post</button>
+          </form>
+        <% } %>
+        
       </div>
     </div>
   </div>

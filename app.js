@@ -8,7 +8,7 @@ var expressSanitizer = require("express-sanitizer"),
     mongoose = require("mongoose"),
     express = require("express"),
     app = express();
-console.log(process.env.DATABASEURL);
+    
 //App configuration
 var url = process.env.DATABASEURL || "mongodb://localhost/kaffibloggen";
 mongoose.connect(url);
@@ -145,18 +145,14 @@ app.get("/blogs/:id", (req, res) => {
 });
 
 //Edit route
-app.get("/blogs/:id/edit", isLoggedIn, (req, res) => {
+app.get("/blogs/:id/edit", checkBlogOwnership, (req, res) => {
   Blog.findById(req.params.id, (err, foundBlog) => {
-    if (err) {
-      res.redirect("/blogs");
-    } else {
-      res.render("edit", {blog: foundBlog});
-    }
+    res.render("edit", {blog: foundBlog});
   });
 });
 
 //Update route
-app.put("/blogs/:id", isLoggedIn, (req, res) => {
+app.put("/blogs/:id", checkBlogOwnership, (req, res) => {
   // var blogBody = req.body.blog.blogpost;
   // req.sanitize(blogBody);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
@@ -169,7 +165,7 @@ app.put("/blogs/:id", isLoggedIn, (req, res) => {
 });
 
 //Delete route
-app.delete("/blogs/:id", isLoggedIn, (req, res) => {
+app.delete("/blogs/:id", checkBlogOwnership, (req, res) => {
   //Destroy
   Blog.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
@@ -225,6 +221,27 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect("/login");
 }
+
+
+
+function checkBlogOwnership (req, res, next) {
+  if (req.isAuthenticated()) {
+    Blog.findById(req.params.id, (err, foundBlog) => {
+      if (err) {
+        res.redirect("back");
+      } else {
+        // Does user own blog
+        if (foundBlog.author.id.equals(req.user._id)) {
+          next();
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
+};
 
 // 404
 app.get("*", (req, res) => {
