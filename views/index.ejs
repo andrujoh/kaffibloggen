@@ -25,7 +25,7 @@
           </a>
           <p class="post-meta">Posted by <em><a href="#"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></p>
           <a href="/blogs/<%= blog._id %>">
-            <img class="img-responsive" src="<%= blog.image %>">
+            <img class="img-responsive img-center" src="<%= blog.image %>">
           </a>
           <p><%= blog.blogpost.substring(0, 150) %> [...]</p>
           <a class="blogLink" href="/blogs/<%= blog._id %>">Les hele artikkelen</a>
