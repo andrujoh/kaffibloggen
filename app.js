@@ -108,7 +108,7 @@ app.get("/blogs", (req, res) => {
 
 //New route
 app.get("/blogs/new", isLoggedIn, (req, res) => {
-  res.render("new");
+  res.render("new", {page: "new"});
 });
 
 //Create route

@@ -52,6 +52,7 @@ hr.small {
   width: 100%;
   z-index: 3;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border: none;
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
@@ -137,11 +138,11 @@ hr.small {
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
-    -webkit-transform: translate3d(0, 100%, 0);
-    -moz-transform: translate3d(0, 100%, 0);
-    -ms-transform: translate3d(0, 100%, 0);
-    -o-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 95%, 0);
+    -moz-transform: translate3d(0, 95%, 0);
+    -ms-transform: translate3d(0, 95%, 0);
+    -o-transform: translate3d(0, 95%, 0);
+    transform: translate3d(0, 95%, 0);
   }
 }
 .intro-header {
