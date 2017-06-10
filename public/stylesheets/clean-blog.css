@@ -444,3 +444,7 @@ body {
   background-color: rgba(229, 229, 229, 0.2);
   color: #fff;
 }
+
+.blogContent p {
+  white-space: pre-line;
+}

@@ -13,7 +13,7 @@
   </div>
 </header>
 
-<div class="container">
+<div class="container-full">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
@@ -37,7 +37,7 @@
         <div class="row control-group">
           <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Bloggpost</label>
-            <textarea rows="5" class="form-control" name="blog[blogpost]" required data-validation-required-message="Vennligst skriv noe."><%= blog.blogpost %></textarea>
+            <textarea rows="15" class="form-control" name="blog[blogpost]" required data-validation-required-message="Vennligst skriv noe."><%= blog.blogpost %></textarea>
             <p class="help-block text-danger"></p>
           </div>
         </div>
@@ -45,7 +45,7 @@
         <div id="success"></div>
         <div class="row">
           <div class="form-group col-xs-12">
-            <button type="submit" class="btn btn-default">Send</button>
+            <button type="submit" class="btn btn-default">Oppdater</button>
           </div>
         </div>
         

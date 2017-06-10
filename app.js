@@ -7,6 +7,7 @@ var expressSanitizer = require("express-sanitizer"),
     passport = require("passport"),
     mongoose = require("mongoose"),
     express = require("express"),
+    flash = require("connect-flash"),
     app = express();
     
 //App configuration
@@ -17,6 +18,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
+app.use(flash());
 
 //Passport configuration
 app.use(require("express-session")({
@@ -32,6 +34,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 
@@ -128,6 +132,7 @@ app.post("/blogs", isLoggedIn, (req, res) => {
     if (err) {
       res.render("new");
     } else {
+      req.flash("success", "Posten ble opprettet");
       res.redirect("/blogs");
     }
   });
@@ -147,7 +152,11 @@ app.get("/blogs/:id", (req, res) => {
 //Edit route
 app.get("/blogs/:id/edit", checkBlogOwnership, (req, res) => {
   Blog.findById(req.params.id, (err, foundBlog) => {
-    res.render("edit", {blog: foundBlog});
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.render("edit", {blog: foundBlog});
+    }
   });
 });
 
@@ -159,6 +168,7 @@ app.put("/blogs/:id", checkBlogOwnership, (req, res) => {
     if (err) {
       res.redirect("/blogs");
     } else {
+      req.flash("success", "Posten ble oppdatert");
       res.redirect("/blogs/" + req.params.id);
     }
   });
@@ -171,6 +181,7 @@ app.delete("/blogs/:id", checkBlogOwnership, (req, res) => {
     if (err) {
       res.redirect("/blogs");
     } else {
+      req.flash("success", "Posten ble slettet");
       res.redirect("/blogs");
     }
   });
@@ -191,6 +202,7 @@ app.post("/register", (req, res) => {
       return res.render("register");
     }
     passport.authenticate("local")(req, res, function() {
+      req.flash("success", "Du ble registrert");
       res.redirect("/blogs");
     });
   });
@@ -212,6 +224,7 @@ app.post("/login", passport.authenticate("local",
 // Logout route
 app.get("/logout",(req, res) => {
   req.logout(),
+  req.flash("success", "Du ble logget ut");
   res.redirect("/blogs");
 });
 
@@ -219,6 +232,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  req.flash("error", "Du må logge inn først");
   res.redirect("/login");
 }
 
@@ -228,17 +242,20 @@ function checkBlogOwnership (req, res, next) {
   if (req.isAuthenticated()) {
     Blog.findById(req.params.id, (err, foundBlog) => {
       if (err) {
+        req.flash("error", "Det skjedde en feil");
         res.redirect("back");
       } else {
         // Does user own blog
         if (foundBlog.author.id.equals(req.user._id)) {
           next();
         } else {
+          req.flash("error", "Du eier ikke denne posten");
           res.redirect("back");
         }
       }
     });
   } else {
+    req.flash("error", "Du har ikke tillatelse til dette");
     res.redirect("back");
   }
 };

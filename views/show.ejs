@@ -14,6 +14,7 @@
   </div>
 </header>
 
+<% include ./partials/flashes %>
 
 <article>
   <div class="container">
@@ -27,7 +28,9 @@
           <hr class="small">
           <span class="meta">Skrevet av <em><a href="javascript:void(0)"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></span>
         </div>
-        <p><%= blog.blogpost %></p>
+        <div class="blogContent">
+          <p><%= blog.blogpost %></p>
+        </div>
         
         <% if (currentUser && blog.author.id.equals(currentUser._id)) { %>
           <a class="btn btn-info" href="/blogs/<%= blog._id %>/edit">Rediger post</a>
