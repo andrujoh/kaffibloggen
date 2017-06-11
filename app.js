@@ -162,8 +162,6 @@ app.get("/blogs/:id/edit", checkBlogOwnership, (req, res) => {
 
 //Update route
 app.put("/blogs/:id", checkBlogOwnership, (req, res) => {
-  // var blogBody = req.body.blog.blogpost;
-  // req.sanitize(blogBody);
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if (err) {
       res.redirect("/blogs");
@@ -179,6 +177,7 @@ app.delete("/blogs/:id", checkBlogOwnership, (req, res) => {
   //Destroy
   Blog.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
+      req.flash("error", "Noe gikk galt ved slettingen");
       res.redirect("/blogs");
     } else {
       req.flash("success", "Posten ble slettet");

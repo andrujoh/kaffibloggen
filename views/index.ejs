@@ -29,7 +29,7 @@
           <a href="/blogs/<%= blog._id %>">
             <img class="img-responsive img-center" src="<%= blog.image %>">
           </a>
-          <p><%= blog.blogpost.substring(0, 150) %> [...]</p>
+          <p><%- blog.blogpost.substring(0, 150) %> [...]</p>
           <a class="blogLink" href="/blogs/<%= blog._id %>">Les hele artikkelen</a>
         </div>
         <hr>

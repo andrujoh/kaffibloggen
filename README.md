@@ -1,11 +1,13 @@
 TODOS
 
+Add local date format
+
 Contact page
 
 About page
 
-Index page
-
 Profile page
+Add confirm and forgot password
 
-Add users - done
+Integrate facebook
+
