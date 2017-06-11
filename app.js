@@ -198,6 +198,7 @@ app.post("/register", (req, res) => {
   User.register(newUser, req.body.password, function(err, user) {
     if (err) {
       console.log(err);
+      req.flash("error", err.message);
       return res.render("register");
     }
     passport.authenticate("local")(req, res, function() {
@@ -216,8 +217,11 @@ app.get("/login", (req, res) => {
 app.post("/login", passport.authenticate("local",
   {
     successRedirect: "/blogs",
-    failureRedirect: "/login"
-  }), (req, res) => {
+    failureRedirect: "/login",
+    failureFlash: "Feil brukernavn eller passord",
+    successFlash: "Velkommen"
+  }), (req, res, err) => {
+    console.log(err);
 });
 
 // Logout route
