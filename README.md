@@ -2,6 +2,8 @@ TODOS
 
 Add local date format
 
+Add pagination
+
 Contact page
 
 About page

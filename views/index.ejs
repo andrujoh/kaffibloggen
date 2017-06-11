@@ -25,7 +25,16 @@
           <a href="/blogs/<%= blog._id %>">
             <h2 class="post-title"><%= blog.title %></h2>
           </a>
-          <p class="post-meta">Skrevet av <em><a href="javascript:void(0)"><%= blog.author.username %></a></em> <%= blog.created.toDateString() %></p>
+          <%
+            var months = [
+              "januar", "februar", "mars", "april", "juni", "juli", "august", "september", "november", "desember"
+            ];
+            
+            var day = blog.created.getDate();
+            var month = months[blog.created.getMonth()];
+            var year = blog.created.getFullYear();
+          %>
+          <p class="post-meta">Skrevet av <em><a href="javascript:void(0)"><%= blog.author.username %></a></em> <%= day + ' ' + month + ' ' + year %></p>
           <a href="/blogs/<%= blog._id %>">
             <img class="img-responsive img-center" src="<%= blog.image %>">
           </a>

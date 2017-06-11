@@ -199,12 +199,17 @@ app.post("/register", (req, res) => {
     if (err) {
       console.log(err);
       req.flash("error", err.message);
-      return res.render("register");
+      res.redirect("register");
+    } else {
+      passport.authenticate("local",
+        {
+          successRedirect: "/blogs",
+          failureRedirect: "/register",
+          failureFlash: "Feil brukernavn eller passord",
+          successFlash: "Du ble registrert. Velkommen!"
+        })(req, res, () => {
+      });
     }
-    passport.authenticate("local")(req, res, function() {
-      req.flash("success", "Du ble registrert");
-      res.redirect("/blogs");
-    });
   });
 });
 
